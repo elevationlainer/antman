@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Antman! 🐜 | Argon Protocol</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        argon: {
+                            bg: '#080b12',
+                            card: '#0f1624',
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            lime: '#a3e635',
+                            violet: '#8b5cf6',
+                            amber: '#fbbf24',
+                            red: '#ef4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Core Argon Neon Styling - Strictly NO Pink */
+        body {
+            background-color: #080b12;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Background Grid & Glow */
+        .argon-grid-bg {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Cards */
+        .argon-card {
+            background: rgba(15, 22, 36, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.22);
+            box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.06);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .argon-card:hover {
+            border-color: rgba(0, 242, 254, 0.45);
+            box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 242, 254, 0.14);
+        }
+
+        /* Neon Text Glows */
+        .glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 242, 254, 0.6), 0 0 28px rgba(0, 242, 254, 0.25);
+        }
+        .glow-lime {
+            text-shadow: 0 0 12px rgba(163, 230, 53, 0.6), 0 0 28px rgba(163, 230, 53, 0.25);
+        }
+        .glow-violet {
+            text-shadow: 0 0 12px rgba(139, 92, 246, 0.65), 0 0 28px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Laser Scanner Animation for Ant-Scan */
+        @keyframes scanLaser {
+            0% { top: 0%; opacity: 0.9; }
+            50% { top: 96%; opacity: 1; }
+            100% { top: 0%; opacity: 0.9; }
+        }
+        .laser-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00f2fe, #a3e635, #00f2fe, transparent);
+            box-shadow: 0 0 15px #00f2fe, 0 0 30px #a3e635;
+            animation: scanLaser 1.6s infinite ease-in-out;
+            z-index: 20;
+            display: none;
+        }
+
+        /* DVD Brain Cell Bounce Box */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 3.2s infinite ease-in-out;
+        }
+
+        /* Stamp Animation */
+        @keyframes stampSlam {
+            0% { transform: scale(3) rotate(-25deg); opacity: 0; }
+            70% { transform: scale(0.9) rotate(-12deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-12deg); opacity: 1; }
+        }
+        .stamp-active {
+            animation: stampSlam 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Whack-a-Pest Arcade Grid */
+        .arcade-hole {
+            aspect-ratio: 1 / 1;
+            background: radial-gradient(circle at 50% 35%, #162032 0%, #06090f 85%);
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 242, 254, 0.25);
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.9);
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .pest-target {
+            position: absolute;
+            inset: 6%;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: translateY(115%);
+            transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+        }
+
+        .pest-target.up {
+            transform: translateY(0%);
+        }
+
+        .pest-aloevera {
+            background: linear-gradient(145deg, #166534, #14532d);
+            border: 2px solid #a3e635;
+            box-shadow: 0 0 15px rgba(163, 230, 53, 0.4);
+        }
+
+        .pest-naman {
+            background: linear-gradient(145deg, #334155, #1e293b);
+            border: 2px solid #94a3b8;
+            box-shadow: 0 0 12px rgba(148, 163, 184, 0.3);
+        }
+
+        .pest-antman {
+            background: linear-gradient(145deg, #4c1d95, #2e1065);
+            border: 2px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .hit-splat {
+            position: absolute;
+            pointer-events: none;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            z-index: 30;
+            animation: splatPop 0.65s ease-out forwards;
+        }
+
+        @keyframes splatPop {
+            0% { transform: translateY(0) scale(0.7); opacity: 1; }
+            100% { transform: translateY(-45px) scale(1.25); opacity: 0; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #080b12; }
+        ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 4px; }
+    </style>
+</head>
+<body class="argon-grid-bg min-h-screen relative selection:bg-cyan-400 selection:text-black">
+
+    <!-- Floating Argon Particles & Confetti Canvas -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+    <!-- Sticky Top Status Bar -->
+    <nav class="sticky top-0 z-40 backdrop-blur-md bg-[#080b12]/85 border-b border-cyan-500/20 px-4 py-3">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping"></span>
+                <span class="font-mono text-xs md:text-sm font-bold tracking-wider text-cyan-400">
+                    ARGON_OS // SUBJECT: ANTMAN 🐜
+                </span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="soundToggleBtn" onclick="toggleSound()" class="px-3 py-1.5 rounded-lg bg-slate-800/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 hover:bg-slate-700 active:scale-95 transition flex items-center gap-1.5">
+                    <span id="soundIcon">🔊</span> <span class="hidden sm:inline">SFX: ON</span>
+                </button>
+                <a href="#sweet-ending" class="px-3 py-1.5 rounded-lg bg-lime-400/15 border border-lime-400/50 text-xs font-mono text-lime-300 hover:bg-lime-400/25 active:scale-95 transition">
+                    Polite Note ↓
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 pt-8 pb-20 space-y-12 md:space-y-16">
+
+        <!-- 1. HERO SECTION & SPECIMEN PHOTO (`antra.jpg`) -->
+        <header class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-xs md:text-sm font-mono">
+                <span>⚠️ WARNING: EXTREME NOISE & DRAMA DETECTED</span>
+            </div>
+
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl tracking-tight text-white glow-cyan leading-none">
+                HAPPY BIRTHDAY, <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-lime-400 to-violet-400">ANTMAN!</span> 🐜
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed">
+                Real name: <strong class="text-white">Antra</strong>. We call you <strong class="text-cyan-400">Antman</strong>—not because you are a cool Marvel superhero, but because ants are <span class="text-lime-400 font-semibold">2 inches tall, super hyper, and show up uninvited</span> to ruin our peace.
+            </p>
+
+            <!-- Photo & Ant-Scanner Module -->
+            <div class="argon-card rounded-3xl p-5 sm:p-8 max-w-3xl mx-auto mt-6">
+                <div class="grid md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Left: Her Photo (`antra.jpg`) -->
+                    <div class="md:col-span-6 flex flex-col items-center">
+                        <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden border-2 border-cyan-400 shadow-[0_0_25px_rgba(0,242,254,0.3)] bg-slate-900 group">
+                            <!-- Laser line during scan -->
+                            <div id="laserLine" class="laser-line"></div>
+                            
+                            <!-- Main Photo Tag (Uses antra.jpg as requested) -->
+                            <img 
+                                id="antra-photo" 
+                                src="antra.jpg" 
+                                alt="Antman" 
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f1624/00f2fe?text=ANTMAN+(antra.jpg)%0A%F0%9F%90%9C+Upload+Her+Photo!';"
+                            >
+
+                            <!-- HUD Corner Overlays -->
+                            <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/75 border border-cyan-400/50 font-mono text-[10px] text-cyan-300">
+                                ID: ANTRA_01
+                            </div>
+                            <div id="scanBadge" class="absolute bottom-2 right-2 px-2.5 py-0.5 rounded bg-lime-400 text-black font-mono text-[11px] font-bold">
+                                SPECIMEN: RARE ANT
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons under Photo -->
+                        <div class="flex flex-wrap justify-center gap-2.5 mt-4 w-full">
+                            <button onclick="runAntScan()" id="scanBtn" class="flex-1 min-w-[140px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold text-sm shadow-[0_0_15px_rgba(0,242,254,0.4)] hover:brightness-110 active:scale-95 transition">
+                                🔍 Run Ant-Scan
+                            </button>
+                            <label class="cursor-pointer py-2.5 px-3.5 rounded-xl bg-slate-800 border border-slate-600 hover:border-cyan-400 text-xs font-mono text-slate-200 flex items-center justify-center gap-1.5 active:scale-95 transition" title="Test how her photo looks right now!">
+                                <span>📸 Test Photo</span>
+                                <input type="file" accept="image/*" class="hidden" onchange="previewPhoto(event)">
+                            </label>
+                        </div>
+                        <p class="text-[11px] font-mono text-slate-400 mt-2">
+                            💡 Tip: Save her photo as <code class="text-cyan-300">antra.jpg</code> in the same folder!
+                        </p>
+                    </div>
+
+                    <!-- Right: Ant-Scan Live Biometric Output -->
+                    <div class="md:col-span-6 text-left space-y-3 bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="font-mono text-xs text-cyan-400 font-bold">📊 BIOMETRIC ROAST SCANNER</span>
+                            <span id="scanStatus" class="font-mono text-[11px] text-lime-400">READY</span>
+                        </div>
+
+                        <div class="space-y-2.5 font-mono text-xs sm:text-sm">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Actual Height:</span>
+                                <span id="statHeight" class="text-cyan-300 font-bold">2.1 Inches (Standard Ant)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Nonchalant Level:</span>
+                                <span id="statChalant" class="text-amber-400 font-bold">-500% (Way Too Chalant)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Voice Volume:</span>
+                                <span id="statVolume" class="text-lime-400 font-bold">Broken Loudspeaker 📢</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Brain Cells Left:</span>
+                                <span id="statBrain" class="text-violet-400 font-bold">1.5 (On Vacation)</span>
+                            </div>
+                        </div>
+
+                        <div id="scanConclusion" class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed">
+                            <strong>System Note:</strong> We didn't buy you an expensive gift because having <strong>Me & Sara</strong> as friends is already a luxury you cannot afford.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- 2. THE CHALANT METER & MOOD ROLLERCOASTER -->
+        <section class="argon-card rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div>
+                    <span class="font-mono text-xs text-lime-400 uppercase tracking-widest">EMOTIONAL WHIPLASH ENGINE</span>
+                    <h2 class="font-display text-2xl sm:text-3xl text-white mt-1">
+                        The 1000% "Chalant" Rollercoaster 😭😂
+                    </h2>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-violet-500/20 border border-violet-400/50 text-violet-300 font-mono text-xs">
+                    Zero Chill Detected
+                </span>
+            </div>
+
+            <p class="text-slate-300 text-sm sm:text-base mb-6">
+                Normal people try to act cool and "nonchalant." Not Antman. You are the most <strong class="text-cyan-300">chalant</strong> human alive. You react to EVERYTHING, laugh like a maniac, start crying 5 seconds later, and then start laughing again while wiping your tears.
+            </p>
+
+            <!-- Interactive Mood Timeline -->
+            <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                <div onclick="triggerMood(0)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">😂</div>
+                    <div class="font-mono text-xs text-cyan-400">00:00 SEC</div>
+                    <h3 class="font-bold text-white mt-1">Hysterical Laughing</h3>
+                    <p class="text-xs text-slate-400 mt-1">Laughing at her own terrible joke before she even finishes telling it.</p>
+                </div>
+
+                <div onclick="triggerMood(1)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-violet-500/40 hover:border-violet-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">😭</div>
+                    <div class="font-mono text-xs text-violet-400">00:10 SEC</div>
+                    <h3 class="font-bold text-white mt-1">Sudden Crying</h3>
+                    <p class="text-xs text-slate-400 mt-1">Wait, why is she crying now?! Nobody knows. Not even her.</p>
+                </div>
+
+                <div onclick="triggerMood(2)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-lime-500/40 hover:border-lime-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">🤣💧</div>
+                    <div class="font-mono text-xs text-lime-400">00:18 SEC</div>
+                    <h3 class="font-bold text-white mt-1">Laughing While Crying</h3>
+                    <p class="text-xs text-slate-400 mt-1">Tears still on her face, wheezing like a broken pressure cooker.</p>
+                </div>
+            </div>
+
+            <!-- Live Reaction GIF & Status Box -->
+            <div class="flex flex-col sm:flex-row items-center gap-5 bg-slate-950/90 p-4 rounded-2xl border border-slate-800">
+                <img id="moodGif" src="https://media.giphy.com/media/26ufcVAp3AiWmQTMY/giphy.gif" alt="Crying and Laughing" class="w-36 h-36 rounded-xl object-cover border border-cyan-400/50 shrink-0" onerror="this.src='https://placehold.co/200x200/0f1624/00f2fe?text=😭😂'">
+                <div class="space-y-2 text-center sm:text-left">
+                    <div id="moodTitle" class="font-display text-lg text-cyan-300">Current Antman Mood: All Emotions At Once</div>
+                    <p id="moodDesc" class="text-sm text-slate-300">
+                        Scientists are still studying how one girl can switch from crying to comedy club laughing in 0.4 seconds. Tap any stage above to test her brain!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TWO-COLUMN CHAOS: SARA ANNOYANCE COUNTER & PUBLIC DISOWNING CERTIFICATE -->
+        <div class="grid md:grid-cols-2 gap-6">
+            
+            <!-- Left: Annoying Sara Counter -->
+            <div class="argon-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <span class="font-mono text-xs text-cyan-400">FULL-TIME UNPAID JOB</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        The "Annoying Sara" Tracker 📈
+                    </h3>
+                    <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                        You annoy <strong class="text-cyan-300">Sara</strong> with references about <strong class="text-lime-300">me</strong> 24/7 like you get paid a monthly salary for it. Sara breathes for 2 seconds and you are already making a joke.
+                    </p>
+
+                    <div class="my-6 p-5 rounded-2xl bg-slate-950 border border-cyan-500/30 text-center">
+                        <div class="font-mono text-xs text-slate-400 mb-1">TIMES ANTRA TEASED SARA TODAY:</div>
+                        <div id="saraCounter" class="font-mono text-4xl sm:text-5xl font-bold text-lime-400 glow-lime">
+                            4,892
+                        </div>
+                        <div id="saraPopup" class="text-xs font-mono text-cyan-300 mt-2 h-4">
+                            Status: Sara is rolling her eyes right now 🙄
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="incrementSaraCounter()" class="w-full py-3 px-4 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 font-bold text-sm hover:bg-cyan-400 hover:text-slate-950 active:scale-95 transition">
+                    ➕ Add Another Annoying Reference
+                </button>
+            </div>
+
+            <!-- Right: Official Public Disowning Agreement -->
+            <div class="argon-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <!-- Hidden Stamp until clicked -->
+                <div id="disownStamp" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 border-4 border-red-500 text-red-500 font-mono font-extrabold text-xl sm:text-2xl px-4 py-2 rounded-xl bg-black/90 shadow-[0_0_30px_rgba(239,68,68,0.6)] text-center">
+                    STRANGER MODE ACTIVE 🏃‍♂️💨
+                </div>
+
+                <div>
+                    <span class="font-mono text-xs text-amber-400">LEGAL FRIENDSHIP CONTRACT</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        Public Disowning Certificate 📜
+                    </h3>
+                    <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                        Because you are <strong class="text-amber-300">way too extroverted</strong> and loud—and will literally start socializing with random strangers, shopkeepers, and stray dogs—<strong>Me & Sara</strong> have an official safety plan:
+                    </p>
+
+                    <div class="my-4 p-4 rounded-2xl bg-slate-950/90 border border-amber-500/30 text-xs sm:text-sm text-slate-300 font-mono space-y-2">
+                        <p>✅ <strong>Clause 1:</strong> If Antman does something embarrassing in a public place, Me & Sara will immediately walk 15 feet away.</p>
+                        <p>✅ <strong>Clause 2:</strong> If anyone asks, "Do you know her?", we will politely say, <em>"No, we have never seen this loud ant in our lives."</em></p>
+                    </div>
+                </div>
+
+                <button id="disownBtn" onclick="signDisowning()" class="w-full py-3 px-4 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm hover:brightness-110 active:scale-95 transition shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+                    ✍️ Sign & Accept Public Disowning
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. OUT-OF-TOPIC SARCASTIC ROAST MACHINE & EXPENSIVE GIFT TROLL -->
+        <section class="grid md:grid-cols-12 gap-6">
+            
+            <!-- Left 7 Cols: Out-of-Topic Roast Generator -->
+            <div class="md:col-span-7 argon-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-violet-400">UNFILTERED FACTS</span>
+                        <span class="font-mono text-xs text-slate-400" id="roastIndexDisplay">ROAST #1 / 8</span>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl text-white mt-1">
+                        Out-of-Topic Brutal Truths 🔥
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        Since it is your birthday, we gathered some completely random facts about your daily life:
+                    </p>
+
+                    <div class="my-6 min-h-[130px] flex items-center justify-center p-5 rounded-2xl bg-slate-950 border border-violet-500/40 relative">
+                        <p id="roastText" class="text-base sm:text-lg font-medium text-center text-slate-100 leading-relaxed">
+                            "Your last remaining brain cell bounces around inside your skull like the old DVD screensaver. Whenever it hits a corner, you finally have one smart thought."
+                        </p>
+                    </div>
+                </div>
+
+                <button onclick="nextRoast()" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-sm sm:text-base shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:brightness-110 active:scale-95 transition">
+                    🎲 Generate Another Brutal Roast
+                </button>
+            </div>
+
+            <!-- Right 5 Cols: Troll Expensive Gift Claim Widget -->
+            <div class="md:col-span-5 argon-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-lime-400/30">
+                <div>
+                    <span class="font-mono text-xs text-lime-400">VIP BIRTHDAY REWARD</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        Claim Your Gift! 🎁
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-2">
+                        We felt bad for roasting you, so Me & Sara pooled our money together to get you a tiny surprise:
+                    </p>
+
+                    <div id="giftBoxDisplay" class="my-5 p-4 rounded-2xl bg-slate-950 border border-lime-400/40 text-center space-y-2">
+                        <div class="text-4xl animate-bounce">📱💸</div>
+                        <div class="font-bold text-lime-300 text-sm sm:text-base">
+                            iPhone 16 Pro Max + ₹10,000 Cash
+                        </div>
+                        <div class="text-[11px] font-mono text-slate-400">
+                            Tap the button below to transfer instantly!
+                        </div>
+                    </div>
+                </div>
+
+                <button id="claimGiftBtn" onclick="claimGiftTroll()" class="w-full py-3.5 px-4 rounded-xl bg-lime-400 text-slate-950 font-extrabold text-sm hover:brightness-110 active:scale-95 transition shadow-[0_0_15px_rgba(163,230,53,0.4)]">
+                    🤑 Claim ₹10,000 + iPhone Now
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. UPGRADED MINI-GAME: SMASH THE PESTS (NAMAN & ALOE VERA) -->
+        <section class="argon-card rounded-3xl p-5 sm:p-8 border-2 border-cyan-400/40">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-6">
+                <span class="px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/40 text-cyan-300 font-mono text-xs">
+                    🕹️ INTERACTIVE ARCADE MISSION
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl text-white glow-cyan">
+                    Operation: Protect Sara’s Peace! 🔨
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Me and you may roast each other, but we always unite against common enemies! Smash the pests before they annoy Sara:
+                </p>
+
+                <!-- Target Legend -->
+                <div class="grid grid-cols-3 gap-2 text-left pt-2">
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-lime-500/40">
+                        <div class="text-base sm:text-lg font-bold text-lime-400">🌵 Aloe Vera</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Annoys Sara for ZERO reason. <strong>+20 PTS!</strong></div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-500/40">
+                        <div class="text-base sm:text-lg font-bold text-slate-200">😐 Naman</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Used to be creepy, now "okay-okay". <strong>+5 PTS</strong></div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/40">
+                        <div class="text-base sm:text-lg font-bold text-cyan-300">🐜 Antman</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Don't hit the birthday girl! <strong>-5 PTS</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game HUD -->
+            <div class="max-w-lg mx-auto">
+                <div class="grid grid-cols-3 gap-3 mb-4 bg-slate-950 p-3 rounded-2xl border border-slate-800 font-mono text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-400">SCORE</div>
+                        <div id="gameScore" class="text-2xl sm:text-3xl font-bold text-cyan-400">0</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400">TIME LEFT</div>
+                        <div id="gameTimer" class="text-2xl sm:text-3xl font-bold text-lime-400">25s</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400">BEST</div>
+                        <div id="gameHigh" class="text-2xl sm:text-3xl font-bold text-violet-400">0</div>
+                    </div>
+                </div>
+
+                <!-- Live Roast Commentary Bar -->
+                <div id="gameToast" class="mb-4 py-2 px-3 rounded-xl bg-slate-900/95 border border-cyan-500/30 text-center font-mono text-xs sm:text-sm text-cyan-200 min-h-[38px] flex items-center justify-center">
+                    Press START MISSION to defend Sara from Aloe Vera & Naman!
+                </div>
+
+                <!-- 3x3 Arcade Board -->
+                <div class="relative">
+                    <!-- Game Over Overlay -->
+                    <div id="gameOverModal" class="hidden absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-md rounded-2xl border-2 border-cyan-400 flex flex-col items-center justify-center p-6 text-center">
+                        <div class="text-4xl mb-2">🏆</div>
+                        <h3 class="font-display text-2xl sm:text-3xl text-white">MISSION COMPLETE!</h3>
+                        <p class="text-slate-300 text-sm mt-1">
+                            Final Score: <span id="finalScoreText" class="text-cyan-400 font-bold text-xl">0</span>
+                        </p>
+                        <p id="finalRankText" class="text-xs font-mono text-lime-300 mt-2 mb-5 max-w-xs">
+                            Aloe Vera has been banished to the desert and Naman is behaving okay-okay.
+                        </p>
+                        <button onclick="startPestGame()" class="py-3 px-6 rounded-xl bg-gradient-to-r from-cyan-400 to-lime-400 text-slate-950 font-extrabold text-sm shadow-[0_0_20px_rgba(0,242,254,0.4)] active:scale-95 transition">
+                            🔄 Play Again
+                        </button>
+                    </div>
+
+                    <div id="arcadeGrid" class="grid grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 bg-slate-950 rounded-2xl border border-slate-800">
+                        <!-- 9 Holes dynamically populated / managed -->
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 0)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 1)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 2)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 3)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 4)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 5)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 6)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 7)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 8)"></div></div>
+                    </div>
+                </div>
+
+                <!-- Start Button -->
+                <div class="mt-5 text-center">
+                    <button id="startGameBtn" onclick="startPestGame()" class="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-base shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:brightness-110 active:scale-95 transition">
+                        ▶️ START SMASHING PESTS
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SINCERE, VERY POLITE & WARM BIRTHDAY MESSAGE AT THE END -->
+        <section id="sweet-ending" class="pt-6">
+            <div class="rounded-3xl p-7 sm:p-10 bg-gradient-to-br from-slate-900 via-[#0d1829] to-slate-900 border-2 border-cyan-400/50 shadow-[0_0_40px_rgba(0,242,254,0.15)] text-center max-w-3xl mx-auto space-y-6 relative overflow-hidden">
+                
+                <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cyan-400/10 border border-cyan-300/30 text-cyan-300 text-xs font-mono">
+                    <span>✨ JOKES OFF // REAL TALK MODE</span>
+                </div>
+
+                <h2 class="font-display text-3xl sm:text-4xl text-white">
+                    A Very Happy Birthday, Antra! 🎂🌟
+                </h2>
+
+                <div class="text-slate-200 text-base sm:text-lg leading-relaxed space-y-4 text-left sm:text-center font-normal">
+                    <p>
+                        Okay, putting all the jokes and sarcasm aside for a moment—we genuinely want to wish you the happiest birthday ever!
+                    </p>
+                    <p>
+                        Even though you and I have never actually met face-to-face in real life yet, it doesn’t take a meeting to know that you are truly a <strong class="text-cyan-300">wonderful human being with a really good heart</strong>.
+                    </p>
+                    <p>
+                        Thank you for always being such a true, loyal, and amazing friend to <strong class="text-lime-300">Sara</strong>. The way you make everyone around you laugh, bring so much happy energy wherever you go, and stand by your friends makes you super special. Never lose that bright, funny, and joyful side of yours.
+                    </p>
+                    <p>
+                        We hope this year brings you lots of happiness, good health, great memories, and everything you wish for. Have the best day ever, Antman!
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <div class="text-xs font-mono text-slate-400">WITH LOTS OF RESPECT & GOOD WISHES,</div>
+                        <div class="font-display text-xl text-cyan-300 mt-0.5">
+                            Me & Sara ✌️✨
+                        </div>
+                    </div>
+
+                    <button onclick="launchBirthdayConfetti()" class="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-lime-400 to-cyan-400 text-slate-950 font-extrabold text-sm shadow-[0_0_25px_rgba(163,230,53,0.4)] hover:brightness-110 active:scale-95 transition">
+                        🎉 Launch Birthday Confetti!
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================
+           1. WEB AUDIO SYNTHESIZER (NO EXTERNAL MP3s)
+           ========================================== */
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTone(freq = 440, type = 'sine', duration = 0.1, slideFreq = null) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                if (slideFreq) {
+                    osc.frequency.exponentialRampToValueAtTime(slideFreq, audioCtx.currentTime + duration);
+                }
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Ignore audio errors if blocked by browser
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            const btn = document.getElementById('soundToggleBtn');
+            if (soundEnabled) {
+                icon.textContent = '🔊';
+                btn.innerHTML = `<span id="soundIcon">🔊</span> <span class="hidden sm:inline">SFX: ON</span>`;
+                playTone(600, 'triangle', 0.12, 900);
+            } else {
+                btn.innerHTML = `<span id="soundIcon">🔇</span> <span class="hidden sm:inline">SFX: OFF</span>`;
+            }
+        }
+
+        /* ==========================================
+           2. PHOTO PREVIEW & ANT-SCANNER
+           ========================================== */
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('antra-photo').src = e.target.result;
+                playTone(520, 'sine', 0.15, 880);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        const scanResults = [
+            {
+                height: "1.8 Inches (Queen Ant)",
+                chalant: "-999% (Crying & Laughing)",
+                volume: "Jet Engine at 3 AM ✈️",
+                brain: "1 Cell (Bouncing like DVD logo)",
+                note: "Scan Complete: Specimen talks to random strangers in public and teases Sara 24/7."
+            },
+            {
+                height: "2.0 Inches (With Heels)",
+                chalant: "Zero Chill Found 🚨",
+                volume: "120 Decibels Minimum 📢",
+                brain: "Currently Buffering... ⏳",
+                note: "Scan Complete: High risk of laughing at her own jokes before finishing the sentence."
+            },
+            {
+                height: "Microscopic Antman 🐜",
+                chalant: "1000% Drama Queen",
+                volume: "Walkie-Talkie on Max",
+                brain: "Out of Office till 2027",
+                note: "Scan Complete: Despite all chaos, scanner confirms she is 100% a good human."
+            }
+        ];
+        let scanIdx = 0;
+
+        function runAntScan() {
+            const laser = document.getElementById('laserLine');
+            const status = document.getElementById('scanStatus');
+            const btn = document.getElementById('scanBtn');
+
+            laser.style.display = 'block';
+            status.textContent = 'SCANNING...';
+            status.className = 'font-mono text-[11px] text-cyan-400 animate-pulse';
+            btn.disabled = true;
+            playTone(300, 'sawtooth', 0.4, 900);
+
+            setTimeout(() => {
+                laser.style.display = 'none';
+                const res = scanResults[scanIdx % scanResults.length];
+                scanIdx++;
+
+                document.getElementById('statHeight').textContent = res.height;
+                document.getElementById('statChalant').textContent = res.chalant;
+                document.getElementById('statVolume').textContent = res.volume;
+                document.getElementById('statBrain').textContent = res.brain;
+                document.getElementById('scanConclusion').innerHTML = `<strong>Scan Report:</strong> ${res.note}`;
+                status.textContent = 'SCAN COMPLETE ✓';
+                status.className = 'font-mono text-[11px] text-lime-400';
+                btn.disabled = false;
+                playTone(880, 'triangle', 0.2, 1200);
+            }, 1500);
+        }
+
+        /* ==========================================
+           3. THE CHALANT MOOD SWITCHER
+           ========================================== */
+        const moods = [
+            {
+                title: "Stage 1: Uncontrollable Laughing 😂",
+                desc: "She thought of something moderately funny and is now wheezing so hard that only dogs can hear her.",
+                gif: "https://media.giphy.com/media/10JhviFuU2gWD6/giphy.gif"
+            },
+            {
+                title: "Stage 2: Sudden Waterworks 😭",
+                desc: "Wait—10 seconds passed and now she's crying! Nobody insulted her, nothing happened, she is just super chalant.",
+                gif: "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif"
+            },
+            {
+                title: "Stage 3: Crying + Laughing Combo 🤣💧",
+                desc: "Tears are still rolling down her cheeks while she's cracking up again. Pure emotional parkour!",
+                gif: "https://media.giphy.com/media/26ufcVAp3AiWmQTMY/giphy.gif"
+            }
+        ];
+
+        function triggerMood(index) {
+            playTone(400 + index * 180, 'sine', 0.15, 700);
+            const m = moods[index];
+            document.getElementById('moodTitle').textContent = m.title;
+            document.getElementById('moodDesc').textContent = m.desc;
+            document.getElementById('moodGif').src = m.gif;
+        }
+
+        /* ==========================================
+           4. SARA ANNOYANCE COUNTER & PUBLIC DISOWNING
+           ========================================== */
+        let saraCount = 4892;
+        const saraStatuses = [
+            "Sara just sighed loudly from across the city 😩",
+            "Do you get paid ₹50 per reference or what?! 💸",
+            "Another reference?! Give Sara a 5-minute break! 😭",
+            "Rent-free in Antman's daily conversation 🧠",
+            "Sara is pretending her phone battery died 📵"
+        ];
+
+        function incrementSaraCounter() {
+            saraCount++;
+            playTone(650, 'square', 0.08, 850);
+            const countEl = document.getElementById('saraCounter');
+            countEl.textContent = saraCount.toLocaleString();
+            const msg = saraStatuses[saraCount % saraStatuses.length];
+            document.getElementById('saraPopup').textContent = msg;
+        }
+
+        function signDisowning() {
+            const stamp = document.getElementById('disownStamp');
+            const btn = document.getElementById('disownBtn');
+            stamp.classList.remove('hidden');
+            stamp.classList.add('stamp-active');
+            playTone(150, 'sawtooth', 0.25, 80);
+            btn.textContent = "✅ Officially Disowned in Public Places";
+            btn.className = "w-full py-3 px-4 rounded-xl bg-slate-800 text-amber-300 border border-amber-500/40 font-mono text-xs";
+        }
+
+        /* ==========================================
+           5. OUT-OF-TOPIC ROAST GENERATOR & TROLL GIFT
+           ========================================== */
+        const outOfTopicRoasts = [
+            "Your last remaining brain cell bounces around inside your skull like the old DVD screensaver. Whenever it hits a corner, you finally have one smart thought.",
+            "You start laughing so hard at your own joke that nobody understands a single word you said, and then we only laugh because your laugh sounds like a broken wiper.",
+            "Your daily screen time is so high that your phone actually begs for mercy every night before going on the charger.",
+            "If talking to random people in public was an Olympic sport, you would win Gold for India while Me & Sara hide behind a bush pretending we don't know you.",
+            "You call yourself chill and 'nonchalant', yet you have 47 different facial expressions in a single 30-second conversation.",
+            "Your sleep schedule is so messed up that even owls look at you and say, 'Bro, go to bed.'",
+            "We thought about getting you a really nice birthday present, but then we realized that us tolerating your chaos is already priceless.",
+            "Even real ants walk in a straight line and mind their own business—meanwhile our Antman chooses maximum chaos every single morning."
+        ];
+        let currentRoast = 0;
+
+        function nextRoast() {
+            currentRoast = (currentRoast + 1) % outOfTopicRoasts.length;
+            playTone(500, 'triangle', 0.12, 350);
+            document.getElementById('roastText').textContent = `"${outOfTopicRoasts[currentRoast]}"`;
+            document.getElementById('roastIndexDisplay').textContent = `ROAST #${currentRoast + 1} / ${outOfTopicRoasts.length}`;
+        }
+
+        let trollStep = 0;
+        function claimGiftTroll() {
+            trollStep++;
+            const btn = document.getElementById('claimGiftBtn');
+            const box = document.getElementById('giftBoxDisplay');
+
+            if (trollStep === 1) {
+                playTone(700, 'sine', 0.1, 400);
+                btn.textContent = "⏳ Verifying if you were nice to Sara...";
+                btn.className = "w-full py-3.5 px-4 rounded-xl bg-cyan-400 text-slate-950 font-extrabold text-sm transition";
+            } else if (trollStep === 2) {
+                playTone(600, 'sine', 0.1, 300);
+                btn.textContent = "⚠️ Error: Too Loud & Chalant! Tap Again";
+                btn.className = "w-full py-3.5 px-4 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-sm transition";
+            } else {
+                playTone(220, 'sawtooth', 0.3, 110);
+                box.innerHTML = `
+                    <div class="font-mono text-xs text-left space-y-1 text-slate-200 p-1">
+                        <div class="text-amber-400 font-bold border-b border-slate-700 pb-1">🧾 OFFICIAL FRIENDSHIP INVOICE</div>
+                        <div class="flex justify-between"><span>Listening to your drama:</span><span>₹250</span></div>
+                        <div class="flex justify-between"><span>Teasing Sara Tax:</span><span>₹150</span></div>
+                        <div class="flex justify-between"><span>Public Loudness Fee:</span><span>₹100</span></div>
+                        <div class="flex justify-between font-bold text-lime-400 border-t border-slate-700 pt-1">
+                            <span>TOTAL YOU OWE US:</span><span>₹500.00</span>
+                        </div>
+                    </div>
+                `;
+                btn.textContent = "😂 Pay ₹500 via Chocolates to Me & Sara";
+                btn.className = "w-full py-3 px-4 rounded-xl bg-slate-800 border border-lime-400/50 text-lime-300 font-mono text-xs";
+            }
+        }
+
+        /* ==========================================
+           6. UPGRADED SMASH-THE-PESTS ARCADE GAME
+           ========================================== */
+        const pestElements = document.querySelectorAll('.pest-target');
+        let score = 0;
+        let highScore = 0;
+        let timeLeft = 25;
+        let gameActive = false;
+        let gameCountdown = null;
+        let activeStates = new Array(9).fill(null);
+        let lastHoleIndex = -1;
+
+        const aloeRoasts = [
+            "🌵 BAM! +20! Stop annoying Sara for no reason, Aloe Vera!",
+            "🌵 SMASHED! +20! Nobody invited this cactus into the chat!",
+            "🌵 CRITICAL HIT! +20! Aloe Vera's annoying streak stopped!"
+        ];
+
+        const namanRoasts = [
+            "😐 BONK! +5! Just a light tap so Naman stays 'okay-okay'!",
+            "😐 TAP! +5! Former creep check complete—behave yourself!",
+            "😐 +5! Keeping Naman in the 'okay-okay person' zone!"
+        ];
+
+        const antmanRoasts = [
+            "🐜 OUCH! -5! Why did you whack Antman?! Now she's crying and laughing! 😭😂",
+            "🐜 HEY! -5! Don't hit the birthday girl! Hit Aloe Vera instead!"
+        ];
+
+        function pickRandomHole() {
+            const idx = Math.floor(Math.random() * 9);
+            if (idx === lastHoleIndex) return pickRandomHole();
+            lastHoleIndex = idx;
+            return idx;
+        }
+
+        function spawnPest() {
+            if (!gameActive) return;
+
+            const idx = pickRandomHole();
+            const el = pestElements[idx];
+
+            // Roll target type: 48% Aloe Vera, 35% Naman, 17% Antman decoy
+            const roll = Math.random();
+            let type = 'aloevera';
+            if (roll > 0.48 && roll <= 0.83) type = 'naman';
+            else if (roll > 0.83) type = 'antman';
+
+            activeStates[idx] = { type, whacked: false };
+            el.className = 'pest-target';
+
+            if (type === 'aloevera') {
+                el.classList.add('pest-aloevera');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">🌵</span><span class="font-display text-[11px] sm:text-xs text-lime-200 mt-0.5">Aloe Vera</span><span class="font-mono text-[9px] text-lime-300">+20</span>`;
+            } else if (type === 'naman') {
+                el.classList.add('pest-naman');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">😐</span><span class="font-display text-[11px] sm:text-xs text-white mt-0.5">Naman</span><span class="font-mono text-[9px] text-slate-300">+5 (Okay-Okay)</span>`;
+            } else {
+                el.classList.add('pest-antman');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">🐜</span><span class="font-display text-[11px] sm:text-xs text-cyan-200 mt-0.5">Antman</span><span class="font-mono text-[9px] text-red-300">DON'T HIT!</span>`;
+            }
+
+            requestAnimationFrame(() => el.classList.add('up'));
+
+            const stayDuration = timeLeft < 10 ? 580 + Math.random() * 350 : 750 + Math.random() * 450;
+
+            setTimeout(() => {
+                el.classList.remove('up');
+                activeStates[idx] = null;
+                if (gameActive) {
+                    setTimeout(spawnPest, 90);
+                }
+            }, stayDuration);
+        }
+
+        function startPestGame() {
+            score = 0;
+            timeLeft = 25;
+            gameActive = true;
+
+            document.getElementById('gameScore').textContent = '0';
+            document.getElementById('gameTimer').textContent = '25s';
+            document.getElementById('gameOverModal').classList.add('hidden');
+            document.getElementById('startGameBtn').disabled = true;
+            document.getElementById('startGameBtn').classList.add('opacity-50');
+            document.getElementById('gameToast').textContent = "GO! Smash Aloe Vera (+20) and keep Naman in check (+5)!";
+
+            playTone(440, 'triangle', 0.15, 880);
+            spawnPest();
+
+            clearInterval(gameCountdown);
+            gameCountdown = setInterval(() => {
+                timeLeft--;
+                document.getElementById('gameTimer').textContent = `${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    endPestGame();
+                }
+            }, 1000);
+        }
+
+        function endPestGame() {
+            gameActive = false;
+            clearInterval(gameCountdown);
+            pestElements.forEach(el => el.classList.remove('up'));
+
+            if (score > highScore) {
+                highScore = score;
+                document.getElementById('gameHigh').textContent = highScore;
+            }
+
+            document.getElementById('finalScoreText').textContent = score;
+            const rankEl = document.getElementById('finalRankText');
+            if (score >= 120) {
+                rankEl.textContent = "LEGENDARY! Sara is 100% protected from Aloe Vera's nonsense!";
+            } else if (score >= 60) {
+                rankEl.textContent = "SOLID JOB! Aloe Vera ran away and Naman is behaving okay-okay.";
+            } else {
+                rankEl.textContent = "Antman, wake up! Your 1.5 brain cells need another round!";
+            }
+
+            document.getElementById('gameOverModal').classList.remove('hidden');
+            document.getElementById('startGameBtn').disabled = false;
+            document.getElementById('startGameBtn').classList.remove('opacity-50');
+            playTone(520, 'sine', 0.3, 260);
+        }
+
+        function whackTarget(event, idx) {
+            if (!gameActive) return;
+            const state = activeStates[idx];
+            if (!state || state.whacked) return;
+
+            state.whacked = true;
+            const el = pestElements[idx];
+            el.classList.remove('up');
+
+            const toast = document.getElementById('gameToast');
+            let splatText = "+20";
+            let splatColor = "#a3e635";
+
+            if (state.type === 'aloevera') {
+                score += 20;
+                splatText = "+20 🌵";
+                splatColor = "#a3e635";
+                toast.textContent = aloeRoasts[Math.floor(Math.random() * aloeRoasts.length)];
+                playTone(750, 'square', 0.12, 1100);
+            } else if (state.type === 'naman') {
+                score += 5;
+                splatText = "+5 😐";
+                splatColor = "#38bdf8";
+                toast.textContent = namanRoasts[Math.floor(Math.random() * namanRoasts.length)];
+                playTone(480, 'triangle', 0.1, 620);
+            } else {
+                score = Math.max(0, score - 5);
+                splatText = "-5 😭😂";
+                splatColor = "#ef4444";
+                toast.textContent = antmanRoasts[Math.floor(Math.random() * antmanRoasts.length)];
+                playTone(200, 'sawtooth', 0.2, 110);
+            }
+
+            document.getElementById('gameScore').textContent = score;
+
+            // Floating score popup inside the hole
+            const hole = el.parentElement;
+            const splat = document.createElement('div');
+            splat.className = 'hit-splat text-lg sm:text-xl';
+            splat.style.color = splatColor;
+            splat.style.left = '25%';
+            splat.style.top = '30%';
+            splat.textContent = splatText;
+            hole.appendChild(splat);
+            setTimeout(() => splat.remove(), 650);
+        }
+
+        /* ==========================================
+           7. ARGON PARTICLES & BIRTHDAY CONFETTI
+           ========================================== */
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const cCtx = confettiCanvas.getContext('2d');
+
+        let particles = [];
+        let confettiPieces = [];
+
+        function resizeCanvases() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+
+        function initBgParticles() {
+            particles = [];
+            const count = window.innerWidth < 640 ? 22 : 45;
+            const colors = ['#00f2fe', '#a3e635', '#8b5cf6'];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * bgCanvas.width,
+                    y: Math.random() * bgCanvas.height,
+                    r: Math.random() * 2 + 0.8,
+                    dx: (Math.random() - 0.5) * 0.35,
+                    dy: (Math.random() - 0.5) * 0.35,
+                    color: colors[i % colors.length]
+                });
+            }
+        }
+
+        function launchBirthdayConfetti() {
+            // Play celebratory arpeggio
+            playTone(523.25, 'triangle', 0.12);
+            setTimeout(() => playTone(659.25, 'triangle', 0.12), 100);
+            setTimeout(() => playTone(783.99, 'triangle', 0.12), 200);
+            setTimeout(() => playTone(1046.5, 'triangle', 0.3), 300);
+
+            const colors = ['#00f2fe', '#a3e635', '#8b5cf6', '#fbbf24', '#38bdf8'];
+            for (let i = 0; i < 95; i++) {
+                confettiPieces.push({
+                    x: confettiCanvas.width / 2 + (Math.random() - 0.5) * 180,
+                    y: confettiCanvas.height * 0.75,
+                    vx: (Math.random() - 0.5) * 14,
+                    vy: -(Math.random() * 14 + 7),
+                    size: Math.random() * 8 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rot: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 12
+                });
+            }
+        }
+
+        function animateVisuals() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            for (const p of particles) {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0) p.x = bgCanvas.width;
+                if (p.x > bgCanvas.width) p.x = 0;
+                if (p.y < 0) p.y = bgCanvas.height;
+                if (p.y > bgCanvas.height) p.y = 0;
+
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                bgCtx.fillStyle = p.color;
+                bgCtx.globalAlpha = 0.35;
+                bgCtx.fill();
+            }
+
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            for (let i = confettiPieces.length - 1; i >= 0; i--) {
+                const c = confettiPieces[i];
+                c.x += c.vx;
+                c.y += c.vy;
+                c.vy += 0.35; // gravity
+                c.rot += c.vRot;
+
+                cCtx.save();
+                cCtx.translate(c.x, c.y);
+                cCtx.rotate((c.rot * Math.PI) / 180);
+                cCtx.fillStyle = c.color;
+                cCtx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size * 0.6);
+                cCtx.restore();
+
+                if (c.y > confettiCanvas.height + 30) {
+                    confettiPieces.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateVisuals);
+        }
+
+        window.onload = function() {
+            resizeCanvases();
+            initBgParticles();
+            animateVisuals();
+            window.addEventListener('resize', () => {
+                resizeCanvases();
+                initBgParticles();
+            });
+        };
+    </script>
+</body>
+</html>
