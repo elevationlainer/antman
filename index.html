@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Antman! 🐜</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        argon: {
+                            bg: '#080b12',
+                            card: '#0f1624',
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            lime: '#a3e635',
+                            violet: '#8b5cf6',
+                            amber: '#fbbf24',
+                            red: '#ef4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080b12;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .argon-grid-bg {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+        }
+
+        .argon-card {
+            background: rgba(15, 22, 36, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.22);
+            box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.06);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .argon-card:hover {
+            border-color: rgba(0, 242, 254, 0.45);
+            box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 242, 254, 0.14);
+        }
+
+        .glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 242, 254, 0.6), 0 0 28px rgba(0, 242, 254, 0.25);
+        }
+        .glow-lime {
+            text-shadow: 0 0 12px rgba(163, 230, 53, 0.6), 0 0 28px rgba(163, 230, 53, 0.25);
+        }
+        .glow-violet {
+            text-shadow: 0 0 12px rgba(139, 92, 246, 0.65), 0 0 28px rgba(139, 92, 246, 0.3);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
+            50% { box-shadow: 0 0 35px rgba(163, 230, 53, 0.65); }
+        }
+        .brain-check-active {
+            animation: pulseGlow 0.8s infinite ease-in-out;
+        }
+
+        @keyframes stampSlam {
+            0% { transform: scale(3) rotate(-25deg); opacity: 0; }
+            70% { transform: scale(0.9) rotate(-12deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-12deg); opacity: 1; }
+        }
+        .stamp-active {
+            animation: stampSlam 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .arcade-hole {
+            aspect-ratio: 1 / 1;
+            background: radial-gradient(circle at 50% 35%, #162032 0%, #06090f 85%);
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 242, 254, 0.25);
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.9);
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .pest-target {
+            position: absolute;
+            inset: 6%;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: translateY(115%);
+            transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+        }
+
+        .pest-target.up {
+            transform: translateY(0%);
+        }
+
+        .pest-aloevera {
+            background: linear-gradient(145deg, #166534, #14532d);
+            border: 2px solid #a3e635;
+            box-shadow: 0 0 15px rgba(163, 230, 53, 0.4);
+        }
+
+        .pest-naman {
+            background: linear-gradient(145deg, #334155, #1e293b);
+            border: 2px solid #94a3b8;
+            box-shadow: 0 0 12px rgba(148, 163, 184, 0.3);
+        }
+
+        .pest-antman {
+            background: linear-gradient(145deg, #4c1d95, #2e1065);
+            border: 2px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .hit-splat {
+            position: absolute;
+            pointer-events: none;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            z-index: 30;
+            animation: splatPop 0.65s ease-out forwards;
+        }
+
+        @keyframes splatPop {
+            0% { transform: translateY(0) scale(0.7); opacity: 1; }
+            100% { transform: translateY(-45px) scale(1.25); opacity: 0; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #080b12; }
+        ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 4px; }
+    </style>
+</head>
+<body class="argon-grid-bg min-h-screen relative selection:bg-cyan-400 selection:text-black">
+
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+    <!-- Top Bar -->
+    <nav class="sticky top-0 z-40 backdrop-blur-md bg-[#080b12]/85 border-b border-cyan-500/20 px-4 py-3">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping"></span>
+                <span class="font-mono text-xs md:text-sm font-bold tracking-wider text-cyan-400">
+                    ANTMAN'S BDAY 🐜 (FROM ME & SARA)
+                </span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="soundToggleBtn" onclick="toggleSound()" class="px-3 py-1.5 rounded-lg bg-slate-800/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 hover:bg-slate-700 active:scale-95 transition flex items-center gap-1.5">
+                    <span id="soundIcon">🔊</span> <span class="hidden sm:inline">Sound: ON</span>
+                </button>
+                <a href="#sweet-ending" class="px-3 py-1.5 rounded-lg bg-lime-400/15 border border-lime-400/50 text-xs font-mono text-lime-300 hover:bg-lime-400/25 active:scale-95 transition">
+                    Nice Message ↓
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-4 pt-8 pb-20 space-y-12 md:space-y-16">
+
+        <!-- Hero & Photo Section -->
+        <header class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 text-xs md:text-sm font-mono">
+                <span>⚠️ COVER YOUR EARS, SHE'S HERE</span>
+            </div>
+
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl tracking-tight text-white glow-cyan leading-none">
+                HAPPY BIRTHDAY, <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-lime-400 to-violet-400">ANTMAN!</span> 🐜
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed">
+                Yes your real name is <strong class="text-white">Antra</strong>, but you're still <strong class="text-cyan-400">Antman</strong> to us. Not because you have cool superpowers, mostly just because ants are <span class="text-lime-400 font-semibold">tiny, hyper, and never sit still</span> for two minutes.
+            </p>
+
+            <!-- Photo Card -->
+            <div class="argon-card rounded-3xl p-5 sm:p-8 max-w-3xl mx-auto mt-6">
+                <div class="grid md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Her Photo -->
+                    <div class="md:col-span-6 flex flex-col items-center">
+                        <div id="photoFrame" class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden border-2 border-cyan-400 shadow-[0_0_25px_rgba(0,242,254,0.3)] bg-slate-900 group">
+                            <img 
+                                id="antra-photo" 
+                                src="antra.jpg" 
+                                alt="Antman" 
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f1624/00f2fe?text=ANTMAN+%F0%9F%90%9C%0A(antra.jpg)';"
+                            >
+
+                            <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-black/75 border border-cyan-400/50 font-mono text-[11px] text-cyan-300">
+                                Birthday Girl 🎂
+                            </div>
+                            <div class="absolute bottom-2 right-2 px-2.5 py-0.5 rounded bg-lime-400 text-black font-mono text-[11px] font-bold">
+                                Actual Ant Size
+                            </div>
+                        </div>
+
+                        <div class="mt-4 w-full max-w-[288px]">
+                            <button onclick="checkBrainActivity()" id="brainBtn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold text-sm shadow-[0_0_15px_rgba(0,242,254,0.4)] hover:brightness-110 active:scale-95 transition">
+                                🧠 Tap to check her brain activity
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Facts About Antman -->
+                    <div class="md:col-span-6 text-left space-y-3 bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="font-mono text-xs text-cyan-400 font-bold">📋 DAILY ANTMAN STATS</span>
+                            <span id="brainStatus" class="font-mono text-[11px] text-lime-400">100% REAL</span>
+                        </div>
+
+                        <div class="space-y-2.5 font-mono text-xs sm:text-sm">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Height:</span>
+                                <span id="statHeight" class="text-cyan-300 font-bold">2 Inches (On a good day)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Chill Level:</span>
+                                <span id="statChalant" class="text-amber-400 font-bold">Zero (Way too chalant)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Talking Volume:</span>
+                                <span id="statVolume" class="text-lime-400 font-bold">Loudspeaker on max 📢</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/90">
+                                <span class="text-slate-400">Current Thought:</span>
+                                <span id="statBrain" class="text-violet-400 font-bold">How to annoy Sara next</span>
+                            </div>
+                        </div>
+
+                        <div id="brainNote" class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed">
+                            <strong>Quick reminder:</strong> Me and Sara didn't buy you an expensive gift because having us in your life is already worth millions. You're welcome.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- Zero Nonchalance / 100% Chalant Section -->
+        <section class="argon-card rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div>
+                    <span class="font-mono text-xs text-lime-400 uppercase tracking-widest">ZERO NONCHALANCE</span>
+                    <h2 class="font-display text-2xl sm:text-3xl text-white mt-1">
+                        100% Chalant At All Times 😭😂
+                    </h2>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-violet-500/20 border border-violet-400/50 text-violet-300 font-mono text-xs">
+                    3 Emotions in 10 Seconds
+                </span>
+            </div>
+
+            <p class="text-slate-300 text-sm sm:text-base mb-6">
+                Everyone else our age tries so hard to act cool and "nonchalant." And then there is you. You are the most <strong class="text-cyan-300">chalant</strong> person alive. You react to literally everything, laugh like crazy, start crying out of nowhere, and then start laughing again before the tears even dry.
+            </p>
+
+            <!-- Mood Switcher Cards -->
+            <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                <div onclick="triggerMood(0)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">😂</div>
+                    <div class="font-mono text-xs text-cyan-400">STEP 1</div>
+                    <h3 class="font-bold text-white mt-1">Laughing Way Too Hard</h3>
+                    <p class="text-xs text-slate-400 mt-1">Can't even finish the story because she's already wheezing at her own joke.</p>
+                </div>
+
+                <div onclick="triggerMood(1)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-violet-500/40 hover:border-violet-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">😭</div>
+                    <div class="font-mono text-xs text-violet-400">STEP 2 (5 SECS LATER)</div>
+                    <h3 class="font-bold text-white mt-1">Randomly Crying</h3>
+                    <p class="text-xs text-slate-400 mt-1">Wait why is she crying now?! Literally nothing bad happened.</p>
+                </div>
+
+                <div onclick="triggerMood(2)" class="cursor-pointer p-4 rounded-2xl bg-slate-900/90 border border-lime-500/40 hover:border-lime-400 transition text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-125 transition">🤣💧</div>
+                    <div class="font-mono text-xs text-lime-400">STEP 3 (2 SECS LATER)</div>
+                    <h3 class="font-bold text-white mt-1">Laughing While Crying</h3>
+                    <p class="text-xs text-slate-400 mt-1">Still wiping tears off her face while cracking up all over again.</p>
+                </div>
+            </div>
+
+            <!-- GIF Display -->
+            <div class="flex flex-col sm:flex-row items-center gap-5 bg-slate-950/90 p-4 rounded-2xl border border-slate-800">
+                <img id="moodGif" src="https://media.giphy.com/media/26ufcVAp3AiWmQTMY/giphy.gif" alt="Crying and Laughing" class="w-36 h-36 rounded-xl object-cover border border-cyan-400/50 shrink-0" onerror="this.src='https://placehold.co/200x200/0f1624/00f2fe?text=😭😂'">
+                <div class="space-y-2 text-center sm:text-left">
+                    <div id="moodTitle" class="font-display text-lg text-cyan-300">Live Look At Antra Right Now</div>
+                    <p id="moodDesc" class="text-sm text-slate-300">
+                        Nobody knows how you switch from crying to dying of laughter in half a second. Tap any step above to see your daily cycle.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoreboard & Public Hangout Agreement -->
+        <div class="grid md:grid-cols-2 gap-6">
+            
+            <!-- Left: Daily Scoreboard -->
+            <div class="argon-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <span class="font-mono text-xs text-cyan-400">HER FAVORITE HOBBY</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        The Daily Scoreboard 📈
+                    </h3>
+                    <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                        You bring up <strong class="text-lime-300">my name</strong> just to tease and annoy <strong class="text-cyan-300">Sara</strong> like someone is paying you a full-time salary for it. Sara can't even breathe in peace without you starting.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-3 my-5">
+                        <div class="p-4 rounded-2xl bg-slate-950 border border-cyan-500/30 text-center">
+                            <div class="font-mono text-[10px] text-slate-400 mb-1">TEASED SARA USING MY NAME</div>
+                            <div id="saraCounter" class="font-mono text-3xl sm:text-4xl font-bold text-lime-400 glow-lime">
+                                4,892
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-950 border border-violet-500/30 text-center">
+                            <div class="font-mono text-[10px] text-slate-400 mb-1">BEING TOO LOUD IN PUBLIC</div>
+                            <div id="loudCounter" class="font-mono text-3xl sm:text-4xl font-bold text-violet-400 glow-violet">
+                                9,999+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="saraPopup" class="text-xs font-mono text-cyan-300 text-center mb-4 min-h-[20px]">
+                        Sara is probably rolling her eyes reading this right now 🙄
+                    </div>
+                </div>
+
+                <button onclick="incrementSaraCounter()" class="w-full py-3 px-4 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 font-bold text-sm hover:bg-cyan-400 hover:text-slate-950 active:scale-95 transition">
+                    ➕ Count Another Time She Annoyed Sara
+                </button>
+            </div>
+
+            <!-- Right: Public Hangout Agreement -->
+            <div class="argon-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div id="disownStamp" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 border-4 border-red-500 text-red-500 font-mono font-extrabold text-xl sm:text-2xl px-4 py-2 rounded-xl bg-black/90 shadow-[0_0_30px_rgba(239,68,68,0.6)] text-center">
+                    WE DON'T KNOW HER 🏃‍♂️💨
+                </div>
+
+                <div>
+                    <span class="font-mono text-xs text-amber-400">EMERGENCY PLAN</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        Public Hangout Agreement 📜
+                    </h3>
+                    <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                        Because you are <strong class="text-amber-300">way too extroverted</strong> and will start talking and laughing loudly with random people anywhere we go, <strong>me and Sara</strong> already have a plan ready:
+                    </p>
+
+                    <div class="my-4 p-4 rounded-2xl bg-slate-950/90 border border-amber-500/30 text-xs sm:text-sm text-slate-300 font-mono space-y-2">
+                        <p>✅ <strong>Rule 1:</strong> The second you start doing too much in a crowded place, me and Sara are walking 20 steps ahead of you.</p>
+                        <p>✅ <strong>Rule 2:</strong> If anyone asks if we're with you, we are deadass saying <em>"No idea who that loud girl is."</em></p>
+                    </div>
+                </div>
+
+                <button id="disownBtn" onclick="signDisowning()" class="w-full py-3 px-4 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm hover:brightness-110 active:scale-95 transition shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+                    ✍️ Stamp the Disowning Agreement
+                </button>
+            </div>
+        </div>
+
+        <!-- Random Roasts & Fake Birthday Gift -->
+        <section class="grid md:grid-cols-12 gap-6">
+            
+            <!-- Random Roast Generator -->
+            <div class="md:col-span-7 argon-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-violet-400">NO FILTER</span>
+                        <span class="font-mono text-xs text-slate-400" id="roastIndexDisplay">ROAST 1 OF 8</span>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl text-white mt-1">
+                        Random Truths About You 🔥
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        Since it's your birthday, you're not allowed to get mad at any of these:
+                    </p>
+
+                    <div class="my-6 min-h-[130px] flex items-center justify-center p-5 rounded-2xl bg-slate-950 border border-violet-500/40 relative">
+                        <p id="roastText" class="text-base sm:text-lg font-medium text-center text-slate-100 leading-relaxed">
+                            "Your last brain cell bounces around in your head like the old DVD logo on a TV screen. Whenever it finally hits a corner, you have one smart thought."
+                        </p>
+                    </div>
+                </div>
+
+                <button onclick="nextRoast()" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-sm sm:text-base shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:brightness-110 active:scale-95 transition">
+                    🎲 Hit Me With Another Roast
+                </button>
+            </div>
+
+            <!-- Fake Birthday Gift -->
+            <div class="md:col-span-5 argon-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-lime-400/30">
+                <div>
+                    <span class="font-mono text-xs text-lime-400">BIRTHDAY PRESENT</span>
+                    <h3 class="font-display text-2xl text-white mt-1">
+                        Your Actual Gift 🎁
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-2">
+                        Okay fine, we felt bad for roasting you so much, so me and Sara put our money together for you:
+                    </p>
+
+                    <div id="giftBoxDisplay" class="my-5 p-4 rounded-2xl bg-slate-950 border border-lime-400/40 text-center space-y-2">
+                        <div class="text-4xl animate-bounce">📱💸</div>
+                        <div class="font-bold text-lime-300 text-sm sm:text-base">
+                            iPhone 16 Pro + ₹10,000 Cash
+                        </div>
+                        <div class="text-[11px] font-mono text-slate-400">
+                            Tap below to claim your birthday gift!
+                        </div>
+                    </div>
+                </div>
+
+                <button id="claimGiftBtn" onclick="claimGiftTroll()" class="w-full py-3.5 px-4 rounded-xl bg-lime-400 text-slate-950 font-extrabold text-sm hover:brightness-110 active:scale-95 transition shadow-[0_0_15px_rgba(163,230,53,0.4)]">
+                    🤑 Claim ₹10,000 + iPhone
+                </button>
+            </div>
+        </section>
+
+        <!-- Whack the Annoying People Mini-Game -->
+        <section class="argon-card rounded-3xl p-5 sm:p-8 border-2 border-cyan-400/40">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-6">
+                <span class="px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/40 text-cyan-300 font-mono text-xs">
+                    🕹️ MINI GAME TIME
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl text-white glow-cyan">
+                    Whack The Annoying People! 🔨
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Me and you might roast each other all day, but we both hate the exact same annoying people who bother Sara. Tap them as fast as you can!
+                </p>
+
+                <!-- Who to hit -->
+                <div class="grid grid-cols-3 gap-2 text-left pt-2">
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-lime-500/40">
+                        <div class="text-base sm:text-lg font-bold text-lime-400">🌵 Aloe Vera</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Annoys Sara for literally zero reason. <strong>+20 PTS!</strong></div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-500/40">
+                        <div class="text-base sm:text-lg font-bold text-slate-200">😐 Naman</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Used to be a total creep, now he's okay-okay. <strong>+5 PTS</strong></div>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/40">
+                        <div class="text-base sm:text-lg font-bold text-cyan-300">🐜 Antman</div>
+                        <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Don't hit yourself on your birthday! <strong>-5 PTS</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoreboard -->
+            <div class="max-w-lg mx-auto">
+                <div class="grid grid-cols-3 gap-3 mb-4 bg-slate-950 p-3 rounded-2xl border border-slate-800 font-mono text-center">
+                    <div>
+                        <div class="text-[10px] text-slate-400">SCORE</div>
+                        <div id="gameScore" class="text-2xl sm:text-3xl font-bold text-cyan-400">0</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400">TIME LEFT</div>
+                        <div id="gameTimer" class="text-2xl sm:text-3xl font-bold text-lime-400">25s</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400">HIGH SCORE</div>
+                        <div id="gameHigh" class="text-2xl sm:text-3xl font-bold text-violet-400">0</div>
+                    </div>
+                </div>
+
+                <div id="gameToast" class="mb-4 py-2 px-3 rounded-xl bg-slate-900/95 border border-cyan-500/30 text-center font-mono text-xs sm:text-sm text-cyan-200 min-h-[38px] flex items-center justify-center">
+                    Hit START GAME below and don't let Aloe Vera get away!
+                </div>
+
+                <!-- 3x3 Grid -->
+                <div class="relative">
+                    <div id="gameOverModal" class="hidden absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-md rounded-2xl border-2 border-cyan-400 flex flex-col items-center justify-center p-6 text-center">
+                        <div class="text-4xl mb-2">🏆</div>
+                        <h3 class="font-display text-2xl sm:text-3xl text-white">TIME'S UP!</h3>
+                        <p class="text-slate-300 text-sm mt-1">
+                            Your Score: <span id="finalScoreText" class="text-cyan-400 font-bold text-xl">0</span>
+                        </p>
+                        <p id="finalRankText" class="text-xs font-mono text-lime-300 mt-2 mb-5 max-w-xs">
+                            Aloe Vera ran away crying and Naman is staying quiet.
+                        </p>
+                        <button onclick="startPestGame()" class="py-3 px-6 rounded-xl bg-gradient-to-r from-cyan-400 to-lime-400 text-slate-950 font-extrabold text-sm shadow-[0_0_20px_rgba(0,242,254,0.4)] active:scale-95 transition">
+                            🔄 Play One More Round
+                        </button>
+                    </div>
+
+                    <div id="arcadeGrid" class="grid grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 bg-slate-950 rounded-2xl border border-slate-800">
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 0)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 1)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 2)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 3)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 4)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 5)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 6)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 7)"></div></div>
+                        <div class="arcade-hole"><div class="pest-target" onclick="whackTarget(event, 8)"></div></div>
+                    </div>
+                </div>
+
+                <div class="mt-5 text-center">
+                    <button id="startGameBtn" onclick="startPestGame()" class="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-base shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:brightness-110 active:scale-95 transition">
+                        ▶️ START GAME
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Polite & Sincere Message at the End -->
+        <section id="sweet-ending" class="pt-6">
+            <div class="rounded-3xl p-7 sm:p-10 bg-gradient-to-br from-slate-900 via-[#0d1829] to-slate-900 border-2 border-cyan-400/50 shadow-[0_0_40px_rgba(0,242,254,0.15)] text-center max-w-3xl mx-auto space-y-6 relative overflow-hidden">
+                
+                <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cyan-400/10 border border-cyan-300/30 text-cyan-300 text-xs font-mono">
+                    <span>✨ OKAY JOKES ASIDE FOR A SECOND</span>
+                </div>
+
+                <h2 class="font-display text-3xl sm:text-4xl text-white">
+                    Happy Birthday For Real, Antra! 🎂🌟
+                </h2>
+
+                <div class="text-slate-200 text-base sm:text-lg leading-relaxed space-y-4 text-left sm:text-center font-normal">
+                    <p>
+                        Putting all the teasing and sarcasm aside, we genuinely want to wish you a very happy birthday!
+                    </p>
+                    <p>
+                        Even though you and I have never actually met in person yet, it honestly doesn't take meeting face to face to know that you are <strong class="text-cyan-300">such a good human being with a really kind heart</strong>.
+                    </p>
+                    <p>
+                        Thank you for always being such a true, supportive, and amazing friend to <strong class="text-lime-300">Sara</strong>. The way you make everyone laugh, bring so much life to every conversation, and care about your friends makes you really special. Never change that fun, loud, happy side of yours.
+                    </p>
+                    <p>
+                        We hope this year brings you the best memories, lots of happiness, and everything you've been wishing for. Have the best birthday ever, Antman!
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <div class="text-xs font-mono text-slate-400">ALWAYS ROOTING FOR YOU,</div>
+                        <div class="font-display text-xl text-cyan-300 mt-0.5">
+                            Me & Sara ✌️✨
+                        </div>
+                    </div>
+
+                    <button onclick="launchBirthdayConfetti()" class="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-400 via-lime-400 to-cyan-400 text-slate-950 font-extrabold text-sm shadow-[0_0_25px_rgba(163,230,53,0.4)] hover:brightness-110 active:scale-95 transition">
+                        🎉 Throw Birthday Confetti!
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Sound effects
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playTone(freq = 440, type = 'sine', duration = 0.1, slideFreq = null) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                if (slideFreq) {
+                    osc.frequency.exponentialRampToValueAtTime(slideFreq, audioCtx.currentTime + duration);
+                }
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundToggleBtn');
+            if (soundEnabled) {
+                btn.innerHTML = `<span id="soundIcon">🔊</span> <span class="hidden sm:inline">Sound: ON</span>`;
+                playTone(600, 'triangle', 0.12, 900);
+            } else {
+                btn.innerHTML = `<span id="soundIcon">🔇</span> <span class="hidden sm:inline">Sound: OFF</span>`;
+            }
+        }
+
+        // Brain activity checker under her photo
+        const brainChecks = [
+            {
+                height: "Still 2 Inches Tall 🐜",
+                chalant: "Crying & laughing at once",
+                volume: "Can hear her from 3 streets away",
+                brain: "Thinking of a joke to annoy Sara",
+                note: "What's going on in her head: Trying to tell a story but laughing so hard nobody knows what she's saying."
+            },
+            {
+                height: "Pocket-sized Antman",
+                chalant: "Zero poker face at all",
+                volume: "Loud enough to wake the neighbors",
+                brain: "Making friends with random strangers",
+                note: "What's going on in her head: About to say hi to random people in public while me and Sara walk away."
+            },
+            {
+                height: "2.1 Inches (With shoes on)",
+                chalant: "1000% dramatic reactions",
+                volume: "Broken megaphone mode 📢",
+                brain: "1 single brain cell working overtime",
+                note: "What's going on in her head: Hating on Aloe Vera with us and then immediately cracking up."
+            }
+        ];
+        let brainIdx = 0;
+
+        function checkBrainActivity() {
+            const frame = document.getElementById('photoFrame');
+            const status = document.getElementById('brainStatus');
+            const btn = document.getElementById('brainBtn');
+
+            frame.classList.add('brain-check-active');
+            status.textContent = 'CHECKING...';
+            status.className = 'font-mono text-[11px] text-cyan-400 animate-pulse';
+            btn.disabled = true;
+            playTone(350, 'sine', 0.25, 750);
+
+            setTimeout(() => {
+                frame.classList.remove('brain-check-active');
+                const res = brainChecks[brainIdx % brainChecks.length];
+                brainIdx++;
+
+                document.getElementById('statHeight').textContent = res.height;
+                document.getElementById('statChalant').textContent = res.chalant;
+                document.getElementById('statVolume').textContent = res.volume;
+                document.getElementById('statBrain').textContent = res.brain;
+                document.getElementById('brainNote').innerHTML = `<strong>Brain Check Result:</strong> ${res.note}`;
+                status.textContent = 'CHECKED ✓';
+                status.className = 'font-mono text-[11px] text-lime-400';
+                btn.disabled = false;
+                playTone(800, 'triangle', 0.18, 1100);
+            }, 900);
+        }
+
+        // Mood switcher
+        const moods = [
+            {
+                title: "Step 1: Dying of Laughter 😂",
+                desc: "She thought of something slightly funny and now she's wheezing so hard she can't even speak.",
+                gif: "https://media.giphy.com/media/10JhviFuU2gWD6/giphy.gif"
+            },
+            {
+                title: "Step 2: Random Tears Out of Nowhere 😭",
+                desc: "Wait 5 seconds passed and now she's crying! Literally nobody did anything, she just feels every emotion at 1000%.",
+                gif: "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif"
+            },
+            {
+                title: "Step 3: Laughing While Still Crying 🤣💧",
+                desc: "Tears are still on her face and she's already laughing again. Only Antman can pull this off.",
+                gif: "https://media.giphy.com/media/26ufcVAp3AiWmQTMY/giphy.gif"
+            }
+        ];
+
+        function triggerMood(index) {
+            playTone(400 + index * 180, 'sine', 0.15, 700);
+            const m = moods[index];
+            document.getElementById('moodTitle').textContent = m.title;
+            document.getElementById('moodDesc').textContent = m.desc;
+            document.getElementById('moodGif').src = m.gif;
+        }
+
+        // Sara annoyance counter
+        let saraCount = 4892;
+        const saraStatuses = [
+            "Sara just sighed so loud from across the room 😩",
+            "Do you get paid ₹50 every time you mention my name to her?! 💸",
+            "Give Sara a 5 minute break please 😭",
+            "You really wake up every day ready to tease Sara 🧠",
+            "Sara is pretending her phone died right now 📵"
+        ];
+
+        function incrementSaraCounter() {
+            saraCount++;
+            playTone(650, 'square', 0.08, 850);
+            const countEl = document.getElementById('saraCounter');
+            countEl.textContent = saraCount.toLocaleString();
+            const msg = saraStatuses[saraCount % saraStatuses.length];
+            document.getElementById('saraPopup').textContent = msg;
+        }
+
+        // Public hangout disowning stamp
+        function signDisowning() {
+            const stamp = document.getElementById('disownStamp');
+            const btn = document.getElementById('disownBtn');
+            stamp.classList.remove('hidden');
+            stamp.classList.add('stamp-active');
+            playTone(150, 'sawtooth', 0.25, 80);
+            btn.textContent = "✅ Stamped! Me & Sara Are Walking Away In Public";
+            btn.className = "w-full py-3 px-4 rounded-xl bg-slate-800 text-amber-300 border border-amber-500/40 font-mono text-xs";
+        }
+
+        // Out-of-topic casual roasts
+        const outOfTopicRoasts = [
+            "Your last brain cell bounces around in your head like the old DVD logo on a TV screen. Whenever it finally hits a corner, you have one smart thought.",
+            "You start laughing so hard at your own story before you even get to the funny part that nobody has any clue what you're talking about.",
+            "Your daily screen time is so high your phone battery probably prays for help every single night.",
+            "If talking to random people on the street was a sport, you'd win a gold medal while me and Sara hide behind a car pretending we don't know you.",
+            "You have the worst poker face in history. Your face shows 45 different reactions in a 10-second conversation.",
+            "We call you Antman because if you stand behind a water bottle, nobody can see where you went.",
+            "Your sleep schedule is so ruined that even night watchmen tell you to go to bed.",
+            "Even actual ants walk quietly in a line, meanwhile our Antman wakes up and chooses maximum noise every single day."
+        ];
+        let currentRoast = 0;
+
+        function nextRoast() {
+            currentRoast = (currentRoast + 1) % outOfTopicRoasts.length;
+            playTone(500, 'triangle', 0.12, 350);
+            document.getElementById('roastText').textContent = `"${outOfTopicRoasts[currentRoast]}"`;
+            document.getElementById('roastIndexDisplay').textContent = `ROAST ${currentRoast + 1} OF ${outOfTopicRoasts.length}`;
+        }
+
+        // Fake gift button
+        let trollStep = 0;
+        function claimGiftTroll() {
+            trollStep++;
+            const btn = document.getElementById('claimGiftBtn');
+            const box = document.getElementById('giftBoxDisplay');
+
+            if (trollStep === 1) {
+                playTone(700, 'sine', 0.1, 400);
+                btn.textContent = "⏳ Checking how many times you annoyed Sara...";
+                btn.className = "w-full py-3.5 px-4 rounded-xl bg-cyan-400 text-slate-950 font-extrabold text-sm transition";
+            } else if (trollStep === 2) {
+                playTone(600, 'sine', 0.1, 300);
+                btn.textContent = "⚠️ Wait, you're way too loud! Tap one more time";
+                btn.className = "w-full py-3.5 px-4 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-sm transition";
+            } else {
+                playTone(220, 'sawtooth', 0.3, 110);
+                box.innerHTML = `
+                    <div class="font-mono text-xs text-left space-y-1 text-slate-200 p-1">
+                        <div class="text-amber-400 font-bold border-b border-slate-700 pb-1">🧾 YOUR BILL FROM ME & SARA</div>
+                        <div class="flex justify-between"><span>Listening to your drama:</span><span>₹250</span></div>
+                        <div class="flex justify-between"><span>Teasing Sara all day:</span><span>₹150</span></div>
+                        <div class="flex justify-between"><span>Laughing at your bad jokes:</span><span>₹100</span></div>
+                        <div class="flex justify-between font-bold text-lime-400 border-t border-slate-700 pt-1">
+                            <span>TOTAL YOU OWE US:</span><span>₹500</span>
+                        </div>
+                    </div>
+                `;
+                btn.textContent = "😂 Pay Us ₹500 (Or Buy Us Food)";
+                btn.className = "w-full py-3 px-4 rounded-xl bg-slate-800 border border-lime-400/50 text-lime-300 font-mono text-xs";
+            }
+        }
+
+        // Whack the annoying people game
+        const pestElements = document.querySelectorAll('.pest-target');
+        let score = 0;
+        let highScore = 0;
+        let timeLeft = 25;
+        let gameActive = false;
+        let gameCountdown = null;
+        let activeStates = new Array(9).fill(null);
+        let lastHoleIndex = -1;
+
+        const aloeRoasts = [
+            "🌵 BAM! +20! Stop bothering Sara for literally no reason, Aloe Vera!",
+            "🌵 SMACK! +20! Why does Aloe Vera even talk to Sara?!",
+            "🌵 GOT HER! +20! Bye bye Aloe Vera, go annoy someone else!"
+        ];
+
+        const namanRoasts = [
+            "😐 BONK! +5! Just a quick tap so Naman remembers not to be a creep again!",
+            "😐 TAP! +5! He's okay-okay now, but still keeping an eye on him!",
+            "😐 +5! For Naman's old creepy behavior!"
+        ];
+
+        const antmanRoasts = [
+            "🐜 OUCH! -5! Why did you hit yourself?! Now you're crying and laughing! 😭😂",
+            "🐜 HEY! -5! Don't hit Antman! Aim for Aloe Vera!"
+        ];
+
+        function pickRandomHole() {
+            const idx = Math.floor(Math.random() * 9);
+            if (idx === lastHoleIndex) return pickRandomHole();
+            lastHoleIndex = idx;
+            return idx;
+        }
+
+        function spawnPest() {
+            if (!gameActive) return;
+
+            const idx = pickRandomHole();
+            const el = pestElements[idx];
+
+            const roll = Math.random();
+            let type = 'aloevera';
+            if (roll > 0.48 && roll <= 0.83) type = 'naman';
+            else if (roll > 0.83) type = 'antman';
+
+            activeStates[idx] = { type, whacked: false };
+            el.className = 'pest-target';
+
+            if (type === 'aloevera') {
+                el.classList.add('pest-aloevera');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">🌵</span><span class="font-display text-[11px] sm:text-xs text-lime-200 mt-0.5">Aloe Vera</span><span class="font-mono text-[9px] text-lime-300">+20</span>`;
+            } else if (type === 'naman') {
+                el.classList.add('pest-naman');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">😐</span><span class="font-display text-[11px] sm:text-xs text-white mt-0.5">Naman</span><span class="font-mono text-[9px] text-slate-300">+5 (Okay-Okay)</span>`;
+            } else {
+                el.classList.add('pest-antman');
+                el.innerHTML = `<span class="text-2xl sm:text-3xl">🐜</span><span class="font-display text-[11px] sm:text-xs text-cyan-200 mt-0.5">Antman</span><span class="font-mono text-[9px] text-red-300">DON'T HIT!</span>`;
+            }
+
+            requestAnimationFrame(() => el.classList.add('up'));
+
+            const stayDuration = timeLeft < 10 ? 580 + Math.random() * 350 : 750 + Math.random() * 450;
+
+            setTimeout(() => {
+                el.classList.remove('up');
+                activeStates[idx] = null;
+                if (gameActive) {
+                    setTimeout(spawnPest, 90);
+                }
+            }, stayDuration);
+        }
+
+        function startPestGame() {
+            score = 0;
+            timeLeft = 25;
+            gameActive = true;
+
+            document.getElementById('gameScore').textContent = '0';
+            document.getElementById('gameTimer').textContent = '25s';
+            document.getElementById('gameOverModal').classList.add('hidden');
+            document.getElementById('startGameBtn').disabled = true;
+            document.getElementById('startGameBtn').classList.add('opacity-50');
+            document.getElementById('gameToast').textContent = "GO! Hit Aloe Vera (+20) and Naman (+5)!";
+
+            playTone(440, 'triangle', 0.15, 880);
+            spawnPest();
+
+            clearInterval(gameCountdown);
+            gameCountdown = setInterval(() => {
+                timeLeft--;
+                document.getElementById('gameTimer').textContent = `${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    endPestGame();
+                }
+            }, 1000);
+        }
+
+        function endPestGame() {
+            gameActive = false;
+            clearInterval(gameCountdown);
+            pestElements.forEach(el => el.classList.remove('up'));
+
+            if (score > highScore) {
+                highScore = score;
+                document.getElementById('gameHigh').textContent = highScore;
+            }
+
+            document.getElementById('finalScoreText').textContent = score;
+            const rankEl = document.getElementById('finalRankText');
+            if (score >= 120) {
+                rankEl.textContent = "TOO GOOD! Aloe Vera won't dare annoy Sara ever again!";
+            } else if (score >= 60) {
+                rankEl.textContent = "Nice job! Aloe Vera ran off and Naman is behaving okay-okay.";
+            } else {
+                rankEl.textContent = "Antman wake up!! Even with 2-inch arms you can score higher than that!";
+            }
+
+            document.getElementById('gameOverModal').classList.remove('hidden');
+            document.getElementById('startGameBtn').disabled = false;
+            document.getElementById('startGameBtn').classList.remove('opacity-50');
+            playTone(520, 'sine', 0.3, 260);
+        }
+
+        function whackTarget(event, idx) {
+            if (!gameActive) return;
+            const state = activeStates[idx];
+            if (!state || state.whacked) return;
+
+            state.whacked = true;
+            const el = pestElements[idx];
+            el.classList.remove('up');
+
+            const toast = document.getElementById('gameToast');
+            let splatText = "+20";
+            let splatColor = "#a3e635";
+
+            if (state.type === 'aloevera') {
+                score += 20;
+                splatText = "+20 🌵";
+                splatColor = "#a3e635";
+                toast.textContent = aloeRoasts[Math.floor(Math.random() * aloeRoasts.length)];
+                playTone(750, 'square', 0.12, 1100);
+            } else if (state.type === 'naman') {
+                score += 5;
+                splatText = "+5 😐";
+                splatColor = "#38bdf8";
+                toast.textContent = namanRoasts[Math.floor(Math.random() * namanRoasts.length)];
+                playTone(480, 'triangle', 0.1, 620);
+            } else {
+                score = Math.max(0, score - 5);
+                splatText = "-5 😭😂";
+                splatColor = "#ef4444";
+                toast.textContent = antmanRoasts[Math.floor(Math.random() * antmanRoasts.length)];
+                playTone(200, 'sawtooth', 0.2, 110);
+            }
+
+            document.getElementById('gameScore').textContent = score;
+
+            const hole = el.parentElement;
+            const splat = document.createElement('div');
+            splat.className = 'hit-splat text-lg sm:text-xl';
+            splat.style.color = splatColor;
+            splat.style.left = '25%';
+            splat.style.top = '30%';
+            splat.textContent = splatText;
+            hole.appendChild(splat);
+            setTimeout(() => splat.remove(), 650);
+        }
+
+        // Background particles & birthday confetti
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const cCtx = confettiCanvas.getContext('2d');
+
+        let particles = [];
+        let confettiPieces = [];
+
+        function resizeCanvases() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+
+        function initBgParticles() {
+            particles = [];
+            const count = window.innerWidth < 640 ? 22 : 45;
+            const colors = ['#00f2fe', '#a3e635', '#8b5cf6'];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * bgCanvas.width,
+                    y: Math.random() * bgCanvas.height,
+                    r: Math.random() * 2 + 0.8,
+                    dx: (Math.random() - 0.5) * 0.35,
+                    dy: (Math.random() - 0.5) * 0.35,
+                    color: colors[i % colors.length]
+                });
+            }
+        }
+
+        function launchBirthdayConfetti() {
+            playTone(523.25, 'triangle', 0.12);
+            setTimeout(() => playTone(659.25, 'triangle', 0.12), 100);
+            setTimeout(() => playTone(783.99, 'triangle', 0.12), 200);
+            setTimeout(() => playTone(1046.5, 'triangle', 0.3), 300);
+
+            const colors = ['#00f2fe', '#a3e635', '#8b5cf6', '#fbbf24', '#38bdf8'];
+            for (let i = 0; i < 95; i++) {
+                confettiPieces.push({
+                    x: confettiCanvas.width / 2 + (Math.random() - 0.5) * 180,
+                    y: confettiCanvas.height * 0.75,
+                    vx: (Math.random() - 0.5) * 14,
+                    vy: -(Math.random() * 14 + 7),
+                    size: Math.random() * 8 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rot: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 12
+                });
+            }
+        }
+
+        function animateVisuals() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            for (const p of particles) {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0) p.x = bgCanvas.width;
+                if (p.x > bgCanvas.width) p.x = 0;
+                if (p.y < 0) p.y = bgCanvas.height;
+                if (p.y > bgCanvas.height) p.y = 0;
+
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                bgCtx.fillStyle = p.color;
+                bgCtx.globalAlpha = 0.35;
+                bgCtx.fill();
+            }
+
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            for (let i = confettiPieces.length - 1; i >= 0; i--) {
+                const c = confettiPieces[i];
+                c.x += c.vx;
+                c.y += c.vy;
+                c.vy += 0.35;
+                c.rot += c.vRot;
+
+                cCtx.save();
+                cCtx.translate(c.x, c.y);
+                cCtx.rotate((c.rot * Math.PI) / 180);
+                cCtx.fillStyle = c.color;
+                cCtx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size * 0.6);
+                cCtx.restore();
+
+                if (c.y > confettiCanvas.height + 30) {
+                    confettiPieces.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateVisuals);
+        }
+
+        window.onload = function() {
+            resizeCanvases();
+            initBgParticles();
+            animateVisuals();
+            window.addEventListener('resize', () => {
+                resizeCanvases();
+                initBgParticles();
+            });
+        };
+    </script>
+</body>
+</html>
